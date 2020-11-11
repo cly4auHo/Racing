@@ -3,19 +3,16 @@ using UnityEngine;
 
 public class RecordSaver : MonoBehaviour
 {
-    [SerializeField] private DirectionController directionController;
     [SerializeField] private int amountOfRecords = 10;
     private const string recordsKey = "recordsKey";
     private const char spliter = '|';
-    private List<float> records = new List<float>();
-    private float startTime;
+    private List<int> records = new List<int>();
 
-    public List<float> Records => records;
+    public List<int> Records => records;
 
     //save all record use PlayerPrefs in string, if need take record, need separete string to array
     private void Start()
     {
-        directionController.RaceEnded += SaveRecord;
         string record = PlayerPrefs.GetString(recordsKey);
 
         if (!string.IsNullOrEmpty(record))
@@ -27,7 +24,7 @@ public class RecordSaver : MonoBehaviour
             {
                 if (!string.IsNullOrEmpty(recordFromPrefs[i]))
                 {
-                    records.Add(float.Parse(recordFromPrefs[i]));
+                    records.Add(int.Parse(recordFromPrefs[i]));
                 }
             }
 
@@ -35,29 +32,19 @@ public class RecordSaver : MonoBehaviour
         }
     }
 
-    public void GameStarted()
+    public void AddRecord(int score)
     {
-        startTime = Time.timeSinceLevelLoad;
-    }
-
-    private void SaveRecord()
-    {
-        directionController.RaceEnded -= SaveRecord;
-        float time = Time.timeSinceLevelLoad - startTime;
-
         if (records.Count < amountOfRecords)
         {
-            records.Add(time);
-            SortRecords();
+            records.Add(score);
         }
         else if (records.Count == amountOfRecords)
         {
             SortRecords();
 
-            if (time < records[records.Count - 1])
+            if (score > records[records.Count - 1])
             {
-                records[records.Count - 1] = time;
-                SortRecords();
+                records[records.Count - 1] = score;
             }
         }
         else
@@ -65,25 +52,28 @@ public class RecordSaver : MonoBehaviour
             Debug.LogError("wrong amount of records if prefs");
         }
 
+        SortRecords();
         string save = string.Empty;
 
-        foreach (float record in records)
+        foreach (int record in records)
         {
             save = save + record.ToString() + spliter.ToString();
         }
-        //Save all times in string, with pattern
+
+        //Save all scores in string, with pattern
         PlayerPrefs.SetString(recordsKey, save);
     }
 
-    private void SortRecords()
+    //sort from bigger to smaller
+    private void SortRecords() 
     {
         for (int i = 0; i < records.Count; i++)
         {
             for (int j = 0; j < records.Count - 1; j++)
             {
-                if (records[j] > records[j + 1])
+                if (records[j] < records[j + 1])
                 {
-                    float temp = records[j + 1];
+                    int temp = records[j + 1];
                     records[j + 1] = records[j];
                     records[j] = temp;
                 }

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class DirectionController : MonoBehaviour
 {
     public Action RaceEnded;
+    public Action LapEnded;
     [SerializeField] private int laps;
     [SerializeField] private Text currentLapLabel;
     [Tooltip("Must stay in order")]
@@ -25,6 +26,7 @@ public class DirectionController : MonoBehaviour
 
         if (currentCheckPoint == checkPoints.Length - 1)
         {
+            LapEnded?.Invoke();
             currentCheckPoint = 0;
             currentLap++;
             currentLapLabel.text = currentLap + "/" + laps;
