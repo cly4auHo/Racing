@@ -5,6 +5,7 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private RecordSaver recordSaver;
     [SerializeField] private ScoreManager scoreManager;
+    [SerializeField] private BonusCreator bonusCreator;
     [SerializeField] private GameObject menu;
     [SerializeField] private GameObject pause;
     [SerializeField] private GameObject tableRecords;
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
     public void Play()
     {
         scoreManager.GameStarted();
+        bonusCreator.StartGame();
         menu.SetActive(false);
         Time.timeScale = 1;
     }

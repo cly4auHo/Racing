@@ -514,14 +514,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abde6bac9b93904da6eb4a9f2cc81be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zTop: 0
-  zBot: 0
-  xLeft: 0
-  xRight: 0
-  zTopInside: 0
-  zBotInside: 0
-  xLeftInside: 0
-  xRightInside: 0
+  zBorders:
+  - 250
+  - 750
+  xBorders:
+  - 250
+  - 750
+  zInsideBorders:
+  - 300
+  - 700
+  xInsideBorders:
+  - 300
+  - 700
+  offset: 10
+  height: 1
+  scoreManager: {fileID: 1983717054}
   delayBetweenSpawnBonus: 5
   bonusePrefabs:
   - {fileID: 6735635873100811850, guid: 86411ead89dc1434e84022e4d174e913, type: 3}
@@ -2489,6 +2496,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recordSaver: {fileID: 104731985}
   scoreManager: {fileID: 1983717054}
+  bonusCreator: {fileID: 103722359}
   menu: {fileID: 1314505802}
   pause: {fileID: 536743405}
   tableRecords: {fileID: 1488035347}
