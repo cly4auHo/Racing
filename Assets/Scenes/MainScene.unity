@@ -1508,11 +1508,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a5b471d44fd914c8a5f4bfdc38370e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deltaSpeed: 0.1
+  deltaSpeed: 0.3
   maxSpeed: 30
   minSpeed: 0
   pressCoef: 5
-  rotationSpeed: 75
+  rotationSpeed: 5
   speedLabel: {fileID: 1185258646}
 --- !u!65 &589774773
 BoxCollider:
@@ -1600,9 +1600,9 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 1
-  m_AngularDrag: 1
+  m_AngularDrag: 10
   m_UseGravity: 0
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
